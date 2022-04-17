@@ -21,10 +21,10 @@ using namespace std;
 // function to calculate ICMP packet checksum
 unsigned short in_cksum(unsigned short *addr, int len)
 {
-    register int sum = 0;
-    u_short answer = 0;
-    register u_short *w = addr;
-    register int nleft = len;
+    register int sum = 0; // 4 bytes
+    u_short answer = 0; // 2 bytes
+    register u_short *w = addr; // 2bytes
+    register int nleft = len; // 4 bytes
     /*
      * The algorithm is simple, using a 32 bit accumulator (sum), we add
      * sequential 16 bit words to it, and at the end, fold back all the
@@ -45,7 +45,7 @@ unsigned short in_cksum(unsigned short *addr, int len)
     sum = (sum >> 16) + (sum & 0xffff);       /* add hi 16 to low 16 */
     sum += (sum >> 16);               /* add carry */
     answer = ~sum;              /* truncate to 16 bits */
-    return (answer);
+    return answer;
 }
 
 
@@ -70,7 +70,6 @@ int main(int argc, char** argv)
       } 
     }
 
-    unsigned short in_cksum(unsigned short *, int);
     char dst_addr[20];
     strcpy(dst_addr,argv[1]);
     struct iphdr* ip_reply;
